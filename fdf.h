@@ -46,6 +46,13 @@ typedef struct	line_s
 	int		swap;
 }				line_t;
 
+typedef struct	map_s
+{
+	int		**iarray;
+	int		rows;
+	int		columns;
+}				map_t;
+
 void    bresenham(cor_t cor, mlx_t mlx);
 void	bresenham_p(cor_t cor, mlx_t mlx);
 void	draw_line(cor_t cor, mlx_t mlx);

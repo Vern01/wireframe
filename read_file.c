@@ -3,7 +3,6 @@
 	int		**read_file(char *s)
 {
 	const int	fd;
-	int			i;
 	int			**iarray;
 	char		*line;
 	char		*array;
