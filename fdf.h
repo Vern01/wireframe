@@ -1,5 +1,7 @@
 #ifndef FDF_H
 # define FDF_H
+# define WINDOW_WIDTH 990
+# define WINDOW_HEIGHT 790
 # include <fcntl.h>
 # include <unistd>
 # include <get_next_line.h>
@@ -49,14 +51,21 @@ typedef struct	line_s
 typedef struct	map_s
 {
 	int		**iarray;
-	int		rows;
-	int		columns;
+	int		row;
+	int		column;
 }				map_t;
 
-void    bresenham(cor_t cor, mlx_t mlx);
-void	bresenham_p(cor_t cor, mlx_t mlx);
+typedef struct	draw_s
+{
+	int		len_x;
+	int		len_y;
+}				draw_t;
+
+void	add_to_array(char **array, map_t *map);
 void	draw_line(cor_t cor, mlx_t mlx);
 cor_t	set_cor(int x1, int y1, int x2, int y2);
-int		**read_file(char *s);
+void	read_file(char *s, map_t *map);
+void	solve_through_x(cor_t cor, line_t line, mlx_t mlx);
+void	solve_through_y(cor_t cor, line_t line, mlx_t mlx);
 
 #endif

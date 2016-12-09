@@ -1,18 +1,35 @@
 #include "fdf.h"
 
-	int		**read_file(char *s)
+void	free_array(char ***array)
 {
-	const int	fd;
-	int			**iarray;
+	char	**temp;
+
+	temp = *array;
+	while (*temp)
+		free(*temp++);
+	free(*array);
+}
+
+void	set_map(map_t *map)
+{
+	map->row = 0;
+	map->column = 0;
+}
+
+void	read_file(char *s, map_t *map)
+{
+	int			fd;
 	char		*line;
-	char		*array;
+	char		**array;
 
 	fd = open(s, O_RDONLY);
+	set_map(map);
+	count = 0;
 	while (get_next_line(fd, &line))
 	{
 		array = ft_strsplit(line, ' ');
-		iarray = add_to_array(array);
+		add_to_array(array, map);
+		free_array(&array);
 		free(line);
 	}
-	return (iarray);
 }

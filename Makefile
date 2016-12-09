@@ -1,18 +1,21 @@
-NAME = read_file
+NAME = wireframe
 
-SRC = main.c read_file.c get_next_line.c draw_line.c set_cor.c solve_through_x.c solve_through_y.c
+SRC = main.c read_file.c get_next_line.c add_to_array.c draw_line.c set_cor.c solve_through_x.c solve_through_y.c
 
 OBJ = $(SRC:.c=.o)
 
 CFLAG = -Wall -Werror -Wextra
 
-INCLUDES = -I .
+MAKE_LIBFT = make -C libft/
 
-ATTACH = -L ./libft -lft
+INCLUDES = -I . -I libft
+
+ATTACH = -L ./libft -lft -lm
 
 all: $(NAME)
 
 $(NAME):
+	$(MAKE_LIBFT)
 	gcc $(CFLAG) $(INCLUDES) -c $(SRC)
 	gcc $(CFLAG) -o $(NAME)	$(OBJ) $(ATTACH)
 
