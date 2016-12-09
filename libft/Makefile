@@ -2,7 +2,7 @@ NAME = libft.a
 
 CFLAGS = -Wall -Werror -Wextra -c
 
-OBJ = ft_putnbr.o ft_putstr.o ft_strsplit.o
+OBJ = ft_putnbr.o ft_putstr.o ft_strsplit.o ft_atoi.o ft_putchar.o 
 
 $(NAME): all
 
@@ -11,7 +11,7 @@ all: $(OBJ)
 	ranlib $(NAME)
 
 clean:
-	bin/rm 0f $(OBJ)
+	bin/rm -f $(OBJ)
 
 fclean: clean
 	/bin/rm -f $(NAME)
@@ -26,3 +26,9 @@ ft_putstr.o: ft_putstr.c
 
 ft_strsplit.o: ft_strsplit.c
 	gcc $(CFLAGS) ft_strsplit.c
+
+ft_atoi.o: ft_atoi.c
+	gcc $(CFLAGS) ft_atoi.c
+
+ft_putchar.o: ft_putchar.c
+	gcc $(CFLAGS) ft_putchar.c
