@@ -24,7 +24,6 @@ void	read_file(char *s, map_t *map)
 
 	fd = open(s, O_RDONLY);
 	set_map(map);
-	count = 0;
 	while (get_next_line(fd, &line))
 	{
 		array = ft_strsplit(line, ' ');

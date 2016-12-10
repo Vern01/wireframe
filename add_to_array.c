@@ -41,16 +41,17 @@ void	add_row(char **array, map_t *map)
 		map->row = size;
 	else if (size != map->row)
 		exit(0); //The row sizes do not match
-	if (!(map->iarray = (int *)malloc(sizeof(int) * (size + 1))))
+	if (!(map->iarray[map->column] = (int *)malloc(sizeof(int) * (size + 1))))
 		exit(0);
 	x = -1; 
 	while (array[++x])
-		map->iarray[x] = ft_atoi(array[x]);
-	map->iarray[x] = -1;
+		map->iarray[map->column][x] = ft_atoi(array[x]);
+	map->iarray[map->column][x] = -1;
 }
 
 void	add_to_array(char **array, map_t *map)
 {
 	realloc_array(map);
-	map->iarray[map->column] = add_row(array);
+	add_row(array, map);
+	map->column++;
 }

@@ -1,6 +1,7 @@
 NAME = wireframe
 
-SRC = main.c read_file.c get_next_line.c add_to_array.c draw_line.c set_cor.c solve_through_x.c solve_through_y.c
+SRC = main.c read_file.c get_next_line.c add_to_array.c draw_line.c set_cor.c solve_through_x.c \
+solve_through_y.c swap_points.c draw.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -10,7 +11,7 @@ MAKE_LIBFT = make -C libft/
 
 INCLUDES = -I . -I libft
 
-ATTACH = -L ./libft -lft -lm
+ATTACH = -L ./libft -lft -lm -lmlx -lXext -lX11
 
 all: $(NAME)
 
