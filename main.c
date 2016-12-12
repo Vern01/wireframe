@@ -1,16 +1,13 @@
-#include <fdf.h>
+#include "fdf.h"
+#include <stdio.h>
 
-void	free_iarray(int ***iarray)
+void	print_map(map_t map)
 {
-	int		**temp;
-	int		y;
+	int		i;
 
-	temp = *iarray;
-	y = -1;
-	while (temp[++y][0] != -1)
-		free(temp[y]);
-	free(temp[y]);
-	free(*iarray);
+	i = -1;
+	while (++i < map.node_size)
+		printf("[%d, %d, %d]\n", map.nodes[i][0], map.nodes[i][1], map.nodes[i][2]);
 }
 
 int		main(int argc, char *argv[])
@@ -23,6 +20,10 @@ int		main(int argc, char *argv[])
 	read_file(argv[1], &map);
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, WINDOW_WIDTH + 10, WINDOW_HEIGHT + 10, "FDF");
+	rotate_x(&map, 50);
+	rotate_y(&map, 15);
+	rotate_z(&map, 30);
 	draw(map, mlx);
 	mlx_loop(mlx.mlx);
+	print_map(map);
 }

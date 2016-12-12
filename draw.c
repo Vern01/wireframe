@@ -1,41 +1,29 @@
-#include <fdf.h>
-
-void	set_draw(draw_t *draw, map_t map)
-{
-	draw->len_x = WINDOW_WIDTH / map.row / 2;
-	draw->len_y = WINDOW_HEIGHT / map.column / 2;
-}
+#include "fdf.h"
 
 void	draw(map_t map, mlx_t mlx)
 {
-	int		y;
-	int		x;
-	draw_t	draw;
 	cor_t	cor;
+	int		y;
+	int		row;
 
-	set_draw(&draw, map);
 	y = -1;
-	while (++y < map.column)
+	row = map.x;
+	while (++y < map.node_size - map.x)
 	{
-		x = -1;
-		while (++x < map.row)
+		if (y + 1 < row)
 		{
-			cor = set_cor(x * draw.len_x, y * draw.len_y, x * draw.len_x + draw.len_x, y * draw.len_y);
-			draw_line(cor, mlx, map.iarray[y][x]);
-			cor = set_cor(x * draw.len_x, y * draw.len_y, x * draw.len_x, y * draw.len_y + draw.len_y);
-			draw_line(cor, mlx, map.iarray[y][x]);
+			cor = set_cor(map.nodes[y][0], map.nodes[y][1], map.nodes[y + 1][0], map.nodes[y + 1][1]);
+			draw_line(cor, mlx);
 		}
+		else
+			row += map.x;
+		cor = set_cor(map.nodes[y][0], map.nodes[y][1], map.nodes[y + map.x][0], map.nodes[y + map.x][1]);
+		draw_line(cor, mlx);
 	}
-	x = -1;
-	while (++x < map.row)
+	y--;
+	while (++y < map.node_size - 1)
 	{
-		cor = set_cor(x * draw.len_x, y * draw.len_y, x * draw.len_x + draw.len_x, y * draw.len_y);
-		draw_line(cor, mlx, 0);
-	}
-	y = -1;
-	while (++y < map.column)
-	{
-		cor = set_cor(x * draw.len_x, y * draw.len_y, x * draw.len_x, y * draw.len_y + draw.len_y);
-		draw_line(cor, mlx, 0);
+		cor = set_cor(map.nodes[y][0], map.nodes[y][1], map.nodes[y + 1][0], map.nodes[y + 1][1]);
+			draw_line(cor, mlx);
 	}
 }

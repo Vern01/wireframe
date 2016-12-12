@@ -1,24 +1,18 @@
-#include <fdf.h>
+#include "fdf.h"
 
-void	realloc_array(map_t *map)
+void	realloc_array(map_t *map, int add_size)
 {
 	int		**new;
 	int		y;
 
-	if (!(new = (int **)malloc(sizeof(int *) * (map->column + 2))))
+	if (!(new = (int **)malloc(sizeof(int *) * (map->node_size + add_size))))
 		exit(0);
 	y = -1;
-	while (++y < map->column)
-		new[y] = map->iarray[y];
-	if (map->column != 0)
-	{
-		free(map->iarray[y]);
-		free(map->iarray);
-	}
-	if (!(new[y + 1] = (int *)malloc(sizeof(int))))
-		exit(0);
-	new[y + 1][0] = -1;
-	map->iarray = new;
+	while (++y < map->node_size)
+		new[y] = map->nodes[y];
+	if (map->node_size != 0)
+		free(map->nodes);
+	map->nodes = new;
 }
 
 int		array_size(char **array)
@@ -31,27 +25,39 @@ int		array_size(char **array)
 	return (count);
 }
 
-void	add_row(char **array, map_t *map)
+void	*add_node(int x, int y, int z)
+{
+	int		*point;
+
+	if (!(point = (int *)malloc(sizeof(int) * 3)))
+		exit(0);
+	point[0] = x;
+	point[1] = y;
+	point[2] = z;
+	return (point);
+}
+
+void	add_row(char **array, map_t *map, int add_size)
 {
 	int		x;
-	int		size;
+	int		*point;
 
-	size = array_size(array);
-	if (map->column == 0)
-		map->row = size;
-	else if (size != map->row)
-		exit(0); //The row sizes do not match
-	if (!(map->iarray[map->column] = (int *)malloc(sizeof(int) * (size + 1))))
+	if (!(point = (int *)malloc(sizeof(int) * 3)))
 		exit(0);
-	x = -1; 
+	x = -1;
 	while (array[++x])
-		map->iarray[map->column][x] = ft_atoi(array[x]);
-	map->iarray[map->column][x] = -1;
+		map->nodes[x + map->node_size] = add_node(x, map->y, atoi(array[x]));
+	if (map->y == 0)
+		map->x = add_size;
+	map->node_size += add_size;
+	map->y++;
 }
 
 void	add_to_array(char **array, map_t *map)
 {
-	realloc_array(map);
-	add_row(array, map);
-	map->column++;
+	int		add_size;
+
+	add_size = array_size(array);
+	realloc_array(map, add_size);
+	add_row(array, map, add_size);
 }

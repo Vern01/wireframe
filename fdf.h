@@ -4,8 +4,8 @@
 # define WINDOW_HEIGHT 790
 # include <fcntl.h>
 # include <unistd.h>
-# include <get_next_line.h>
-# include <libft.h>
+# include "get_next_line.h"
+# include "libft.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
@@ -38,7 +38,6 @@ typedef struct	cor_s
 	int		y1;
 	int		x2;
 	int		y2;
-	int		color;
 }				cor_t;
 
 typedef struct	line_s
@@ -51,9 +50,12 @@ typedef struct	line_s
 
 typedef struct	map_s
 {
-	int		**iarray;
-	int		row;
-	int		column;
+	int		**nodes;
+	int		**edges;
+	int		node_size;
+	int		edge_size;
+	int		y;
+	int		x;
 }				map_t;
 
 typedef struct	draw_s
@@ -64,11 +66,16 @@ typedef struct	draw_s
 
 void	add_to_array(char **array, map_t *map);
 void	draw(map_t map, mlx_t mlx);
-void	draw_line(cor_t cor, mlx_t mlx, int height);
+void	draw_line(cor_t cor, mlx_t mlx);
 cor_t	set_cor(int x1, int y1, int x2, int y2);
 void	read_file(char *s, map_t *map);
+int		set_color_x(cor_t cor, map_t map, int n);
 void	solve_through_x(cor_t cor, line_t line, mlx_t mlx);
 void	solve_through_y(cor_t cor, line_t line, mlx_t mlx);
 void    swap_points(cor_t *cor);
+void	set_line_info(line_t *line, cor_t cor);
+void	rotate_x(map_t *map, double theta);
+void	rotate_y(map_t *map, double theta);
+void	rotate_z(map_t *map, double theta);
 
 #endif
