@@ -5,7 +5,7 @@ void	rotate_y(map_t *map, double theta)
 	double	vsin;
 	double	vcos;
 	int		i;
-	int		temp;
+	double	temp;
 
 	theta = theta * M_PI / 180.0;
 	vsin = sin(theta);

@@ -2,10 +2,10 @@
 
 void	realloc_array(map_t *map, int add_size)
 {
-	int		**new;
+	double	**new;
 	int		y;
 
-	if (!(new = (int **)malloc(sizeof(int *) * (map->node_size + add_size))))
+	if (!(new = (double **)malloc(sizeof(double *) * (map->node_size + add_size))))
 		exit(0);
 	y = -1;
 	while (++y < map->node_size)
@@ -27,9 +27,9 @@ int		array_size(char **array)
 
 void	*add_node(int x, int y, int z)
 {
-	int		*point;
+	double	*point;
 
-	if (!(point = (int *)malloc(sizeof(int) * 3)))
+	if (!(point = (double *)malloc(sizeof(double) * 3)))
 		exit(0);
 	point[0] = x;
 	point[1] = y;
@@ -40,9 +40,9 @@ void	*add_node(int x, int y, int z)
 void	add_row(char **array, map_t *map, int add_size)
 {
 	int		x;
-	int		*point;
+	double	*point;
 
-	if (!(point = (int *)malloc(sizeof(int) * 3)))
+	if (!(point = (double *)malloc(sizeof(double) * 3)))
 		exit(0);
 	x = -1;
 	while (array[++x])

@@ -50,24 +50,22 @@ typedef struct	line_s
 
 typedef struct	map_s
 {
-	int		**nodes;
-	int		**edges;
+	double		**nodes;
 	int		node_size;
-	int		edge_size;
 	int		y;
 	int		x;
 }				map_t;
 
 typedef struct	draw_s
 {
-	int		len_x;
-	int		len_y;
+	double	len_x;
+	double	len_y;
 }				draw_t;
 
 void	add_to_array(char **array, map_t *map);
 void	draw(map_t map, mlx_t mlx);
 void	draw_line(cor_t cor, mlx_t mlx);
-cor_t	set_cor(int x1, int y1, int x2, int y2);
+cor_t	set_cor(double x1, double y1, double x2, double y2);
 void	read_file(char *s, map_t *map);
 int		set_color_x(cor_t cor, map_t map, int n);
 void	solve_through_x(cor_t cor, line_t line, mlx_t mlx);

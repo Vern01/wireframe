@@ -7,7 +7,7 @@ void	print_map(map_t map)
 
 	i = -1;
 	while (++i < map.node_size)
-		printf("[%d, %d, %d]\n", map.nodes[i][0], map.nodes[i][1], map.nodes[i][2]);
+		printf("[%f, %f, %f]\n", map.nodes[i][0], map.nodes[i][1], map.nodes[i][2]);
 }
 
 int		main(int argc, char *argv[])
@@ -21,7 +21,7 @@ int		main(int argc, char *argv[])
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, WINDOW_WIDTH + 10, WINDOW_HEIGHT + 10, "FDF");
 	rotate_x(&map, 50);
-	rotate_y(&map, 15);
+	rotate_y(&map, 30);
 	rotate_z(&map, 30);
 	draw(map, mlx);
 	mlx_loop(mlx.mlx);
