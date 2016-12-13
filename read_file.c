@@ -44,8 +44,9 @@ void	read_file(char *s, map_t *map)
 	i = -1;
 	while (++i < map->node_size)
 	{
-		map->nodes[i][0] = map->nodes[i][0] * draw.len_x + 400.0;
-		map->nodes[i][1] = map->nodes[i][1] * draw.len_y - 150.0;
-		map->nodes[i][2] = map->nodes[i][2] * 2.0;
+		map->nodes[i][0] = map->nodes[i][0] * draw.len_x;
+		map->nodes[i][1] = map->nodes[i][1] * draw.len_y;
+		map->nodes[i][2] = map->nodes[i][2] * 3.0;
 	}
+	center_map_ax(map);
 }

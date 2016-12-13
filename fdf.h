@@ -2,6 +2,8 @@
 # define FDF_H
 # define WINDOW_WIDTH 990
 # define WINDOW_HEIGHT 790
+# define HALF_WIDTH WINDOW_WIDTH / 2
+# define HALF_HEIGHT WINDOW_HEIGHT / 2
 # include <fcntl.h>
 # include <unistd.h>
 # include "get_next_line.h"
@@ -64,5 +66,6 @@ void	rotate_y(map_t *map, double theta);
 void	rotate_z(map_t *map, double theta);
 int		key_hook(int keycode, void *m);
 int		quite(void *m);
+void    center_map_ax(map_t *map);
 
 #endif
