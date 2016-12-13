@@ -13,23 +13,19 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 
-typedef struct	camera_s
+typedef struct	map_s
 {
-	int		position;
-	int		target;
-}				camera_t;
-
-typedef struct	mesh_s
-{
-	void	*vertices;//create an array that contains only three element in 3d space for each void
-	int		rotation;
-	int		position;
-}				mesh_t;
+	double	**nodes;
+	int		node_size;
+	int		y;
+	int		x;
+}				map_t;
 
 typedef struct	mlx_s
 {
 	void	*mlx;
 	void	*win;
+	map_t	*map;
 }				mlx_t;
 
 typedef struct	cor_s
@@ -45,16 +41,7 @@ typedef struct	line_s
 	int		dx;
 	int		dy;
 	int		eps;
-	int		swap;
 }				line_t;
-
-typedef struct	map_s
-{
-	double		**nodes;
-	int		node_size;
-	int		y;
-	int		x;
-}				map_t;
 
 typedef struct	draw_s
 {
@@ -75,5 +62,7 @@ void	set_line_info(line_t *line, cor_t cor);
 void	rotate_x(map_t *map, double theta);
 void	rotate_y(map_t *map, double theta);
 void	rotate_z(map_t *map, double theta);
+int		key_hook(int keycode, void *m);
+int		quite(void *m);
 
 #endif

@@ -18,12 +18,15 @@ int		main(int argc, char *argv[])
 	if (argc == 1)
 		return (write(1, "Please give a file name:\n", 25));
 	read_file(argv[1], &map);
+	print_map(map);
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, WINDOW_WIDTH + 10, WINDOW_HEIGHT + 10, "FDF");
+	mlx.map = &map;
 	rotate_x(&map, 50);
 	rotate_y(&map, 30);
 	rotate_z(&map, 30);
 	draw(map, mlx);
+	mlx_key_hook(mlx.win, key_hook, &mlx);
+	mlx_hook(mlx.win, 17, 0L, &quite, &mlx);
 	mlx_loop(mlx.mlx);
-	print_map(map);
 }

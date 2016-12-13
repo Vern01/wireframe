@@ -40,10 +40,7 @@ void	*add_node(int x, int y, int z)
 void	add_row(char **array, map_t *map, int add_size)
 {
 	int		x;
-	double	*point;
-
-	if (!(point = (double *)malloc(sizeof(double) * 3)))
-		exit(0);
+	
 	x = -1;
 	while (array[++x])
 		map->nodes[x + map->node_size] = add_node(x, map->y, atoi(array[x]));
