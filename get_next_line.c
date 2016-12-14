@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next.c                                         :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vivan-de <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/17 11:32:54 by vivan-de          #+#    #+#             */
-/*   Updated: 2016/07/17 16:33:17 by vivan-de         ###   ########.fr       */
+/*   Created: 2016/12/14 13:21:48 by vivan-de          #+#    #+#             */
+/*   Updated: 2016/12/14 14:15:29 by vivan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,24 @@ char	*ft_realloc(char *p, size_t size, int current_size)
 	return (p);
 }
 
-char	get_char(const int fd)
+int		get_char(const int fd, char *c)
 {
 	static char	buff[BUFF_SIZE];
 	static char	*p;
 	static int	len = 0;
-	char		c;
 
 	if (len == 0)
 	{
-		len = read(fd, buff, BUFF_SIZE);
+		if ((len = read(fd, buff, BUFF_SIZE)) < 0)
+			return (1);
 		p = (char *)&buff;
 		if (len == 0)
-			return ('\0');
+			return (*c = '\0');
 	}
-	c = *p;
+	*c = *p;
 	p++;
 	len--;
-	return (c);
+	return (0);
 }
 
 int		get_next_line(const int fd, char **line)
@@ -54,13 +54,13 @@ int		get_next_line(const int fd, char **line)
 	char	*temp;
 
 	i = 0;
-	if (!(temp = (char *)malloc(sizeof(char) * BUFF_SIZE + 1)))
-		return (0);
-	c = get_char(fd);
+	temp = (char *)malloc(sizeof(char) * BUFF_SIZE + 1);
+	if (get_char(fd, &c))
+		return (-1);
 	while (c != '\n' && c != '\0' && temp != NULL)
 	{
 		temp[i++] = c;
-		c = get_char(fd);
+		get_char(fd, &c);
 		if (i % (BUFF_SIZE + 1) == 0)
 			temp = ft_realloc(temp, i + BUFF_SIZE + 1, i);
 	}

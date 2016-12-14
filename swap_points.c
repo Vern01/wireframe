@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   swap_points.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vivan-de <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/14 15:30:45 by vivan-de          #+#    #+#             */
+/*   Updated: 2016/12/14 15:31:19 by vivan-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-void    swap_points(cor_t *cor)
+void	swap_points(t_cor *cor)
 {
-    int     temp;
+	int		temp;
 
-    temp = cor->x1;
-    cor->x1 = cor->x2;
-    cor->x2 = temp;
-    temp = cor->y1;
-    cor->y1 = cor->y2;
-    cor->y2 = temp;
+	temp = cor->x1;
+	cor->x1 = cor->x2;
+	cor->x2 = temp;
+	temp = cor->y1;
+	cor->y1 = cor->y2;
+	cor->y2 = temp;
 }

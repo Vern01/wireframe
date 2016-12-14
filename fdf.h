@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vivan-de <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/14 15:32:16 by vivan-de          #+#    #+#             */
+/*   Updated: 2016/12/14 15:38:24 by vivan-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
-# define WINDOW_WIDTH 990
-# define WINDOW_HEIGHT 790
-# define HALF_WIDTH WINDOW_WIDTH / 2
-# define HALF_HEIGHT WINDOW_HEIGHT / 2
+# define WINDOW_W 990
+# define WINDOW_H 790
+# define HALF_WIDTH WINDOW_W / 2
+# define HALF_HEIGHT WINDOW_H / 2
 # include <fcntl.h>
 # include <unistd.h>
 # include "get_next_line.h"
@@ -15,57 +27,57 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 
-typedef struct	map_s
+typedef struct	s_map
 {
-	double	**nodes;
-	int		node_size;
+	double	**n;
+	int		size;
 	int		y;
 	int		x;
-}				map_t;
+}				t_map;
 
-typedef struct	mlx_s
+typedef struct	s_mlx
 {
 	void	*mlx;
 	void	*win;
-	map_t	*map;
-}				mlx_t;
+	t_map	*map;
+}				t_mlx;
 
-typedef struct	cor_s
+typedef struct	s_cor
 {
 	int		x1;
 	int		y1;
 	int		x2;
 	int		y2;
-}				cor_t;
+}				t_cor;
 
-typedef struct	line_s
+typedef struct	s_line
 {
 	int		dx;
 	int		dy;
 	int		eps;
-}				line_t;
+}				t_line;
 
-typedef struct	draw_s
+typedef struct	s_draw
 {
 	double	len_x;
 	double	len_y;
-}				draw_t;
+}				t_draw;
 
-void	add_to_array(char **array, map_t *map);
-void	draw(map_t map, mlx_t mlx);
-void	draw_line(cor_t cor, mlx_t mlx);
-cor_t	set_cor(double x1, double y1, double x2, double y2);
-void	read_file(char *s, map_t *map);
-int		set_color_x(cor_t cor, map_t map, int n);
-void	solve_through_x(cor_t cor, line_t line, mlx_t mlx);
-void	solve_through_y(cor_t cor, line_t line, mlx_t mlx);
-void    swap_points(cor_t *cor);
-void	set_line_info(line_t *line, cor_t cor);
-void	rotate_x(map_t *map, double theta);
-void	rotate_y(map_t *map, double theta);
-void	rotate_z(map_t *map, double theta);
-int		key_hook(int keycode, void *m);
-int		quite(void *m);
-void    center_map_ax(map_t *map);
+void			add_to_array(char **array, t_map *map);
+void			draw(t_map map, t_mlx mlx);
+void			draw_line(t_cor cor, t_mlx mlx);
+t_cor			set_cor(double x1, double y1, double x2, double y2);
+void			read_file(char *s, t_map *map);
+int				set_color_x(t_cor cor, t_map map, int n);
+void			solve_through_x(t_cor cor, t_line line, t_mlx mlx);
+void			solve_through_y(t_cor cor, t_line line, t_mlx mlx);
+void			swap_points(t_cor *cor);
+void			set_line_info(t_line *line, t_cor cor);
+void			rotate_x(t_map *map, double theta);
+void			rotate_y(t_map *map, double theta);
+void			rotate_z(t_map *map, double theta);
+int				key_hook(int keycode, void *m);
+int				quite(void *m);
+void			center_map_ax(t_map *map);
 
 #endif

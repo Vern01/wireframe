@@ -1,29 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vivan-de <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/14 16:23:30 by vivan-de          #+#    #+#             */
+/*   Updated: 2016/12/14 16:25:05 by vivan-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-void	draw(map_t map, mlx_t mlx)
+void	draw(t_map m, t_mlx mlx)
 {
-	cor_t	cor;
+	t_cor	cor;
 	int		y;
 	int		row;
 
 	y = -1;
-	row = map.x;
-	while (++y < map.node_size - map.x)
+	row = m.x;
+	while (++y < m.size - m.x)
 	{
 		if (y + 1 < row)
 		{
-			cor = set_cor(map.nodes[y][0], map.nodes[y][1], map.nodes[y + 1][0], map.nodes[y + 1][1]);
+			cor = set_cor(m.n[y][0], m.n[y][1], m.n[y + 1][0], m.n[y + 1][1]);
 			draw_line(cor, mlx);
 		}
 		else
-			row += map.x;
-		cor = set_cor(map.nodes[y][0], map.nodes[y][1], map.nodes[y + map.x][0], map.nodes[y + map.x][1]);
+			row += m.x;
+		cor = set_cor(m.n[y][0], m.n[y][1], m.n[y + m.x][0], m.n[y + m.x][1]);
 		draw_line(cor, mlx);
 	}
 	y--;
-	while (++y < map.node_size - 1)
+	while (++y < m.size - 1)
 	{
-		cor = set_cor(map.nodes[y][0], map.nodes[y][1], map.nodes[y + 1][0], map.nodes[y + 1][1]);
-			draw_line(cor, mlx);
+		cor = set_cor(m.n[y][0], m.n[y][1], m.n[y + 1][0], m.n[y + 1][1]);
+		draw_line(cor, mlx);
 	}
 }

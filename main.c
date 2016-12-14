@@ -1,26 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vivan-de <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/14 15:19:39 by vivan-de          #+#    #+#             */
+/*   Updated: 2016/12/14 15:19:41 by vivan-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include <stdio.h>
 
-void	print_map(map_t map)
+void	print_map(t_map map)
 {
 	int		i;
 
 	i = -1;
-	while (++i < map.node_size)
-		printf("[%f, %f, %f]\n", map.nodes[i][0], map.nodes[i][1], map.nodes[i][2]);
+	while (++i < map.size)
+		printf("[%f, %f, %f]\n", map.n[i][0], map.n[i][1], map.n[i][2]);
 }
 
 int		main(int argc, char *argv[])
 {
-	mlx_t	mlx;
-	map_t	map;
+	t_mlx	mlx;
+	t_map	map;
 
 	if (argc == 1)
 		return (write(1, "Please give a file name:\n", 25));
 	read_file(argv[1], &map);
-	print_map(map);
 	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, WINDOW_WIDTH + 10, WINDOW_HEIGHT + 10, "FDF");
+	mlx.win = mlx_new_window(mlx.mlx, WINDOW_W + 10, WINDOW_H + 10, "FDF");
 	mlx.map = &map;
 	rotate_x(&map, 50);
 	rotate_y(&map, 30);

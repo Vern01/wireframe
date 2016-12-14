@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_color.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vivan-de <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/14 15:34:29 by vivan-de          #+#    #+#             */
+/*   Updated: 2016/12/14 15:34:40 by vivan-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-int		set_color(cor_t cor, map_t map, int n)
+int		set_color(t_cor cor, t_map map, int n)
 {
 	static int		color = -1;
 	static int		c_change;
@@ -29,7 +41,7 @@ int		set_color(cor_t cor, map_t map, int n)
 	return (color);
 }
 
-int		set_color(cor_t cor, map_t map, int n)
+int		set_color(t_cor cor, t_map map, int n)
 {
 	static int		color = -1;
 	static int		c_change;

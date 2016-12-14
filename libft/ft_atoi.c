@@ -6,7 +6,7 @@
 /*   By: vivan-de <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 17:05:27 by vivan-de          #+#    #+#             */
-/*   Updated: 2016/05/15 18:22:58 by vivan-de         ###   ########.fr       */
+/*   Updated: 2016/12/14 15:35:24 by vivan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		ft_atoi(const char *str)
 	unsigned int	val;
 
 	neg = 0;
-	val  = 0;
+	val = 0;
 	while (*str == ' ' || *str == '\t')
 		str++;
 	if (*str == '-')

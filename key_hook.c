@@ -1,20 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vivan-de <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/14 15:14:52 by vivan-de          #+#    #+#             */
+/*   Updated: 2016/12/14 15:15:19 by vivan-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-
-void	free_map(map_t *map)
+void	free_map(t_map *map)
 {
 	int		count;
 
 	count = -1;
-	while (++count < map->node_size)
-		free(map->nodes[count]);
-	free(map->nodes);
+	while (++count < map->size)
+		free(map->n[count]);
+	free(map->n);
 }
 
 int		quite(void *m)
 {
-	mlx_t	*mlx;
-	map_t	*map;
+	t_mlx	*mlx;
+	t_map	*map;
 
 	mlx = m;
 	map = mlx->map;
@@ -25,8 +36,8 @@ int		quite(void *m)
 
 int		key_hook(int keycode, void *m)
 {
-	mlx_t	*mlx;
-	map_t	*map;
+	t_mlx	*mlx;
+	t_map	*map;
 
 	mlx = m;
 	map = mlx->map;

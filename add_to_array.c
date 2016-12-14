@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_to_array.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vivan-de <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/14 14:58:28 by vivan-de          #+#    #+#             */
+/*   Updated: 2016/12/14 15:01:55 by vivan-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-void	realloc_array(map_t *map, int add_size)
+void	realloc_array(t_map *map, int add_size)
 {
 	double	**new;
 	int		y;
 
-	if (!(new = (double **)malloc(sizeof(double *) * (map->node_size + add_size))))
+	if (!(new = (double **)malloc(sizeof(double *) * (map->size + add_size))))
 		exit(0);
 	y = -1;
-	while (++y < map->node_size)
-		new[y] = map->nodes[y];
-	if (map->node_size != 0)
-		free(map->nodes);
-	map->nodes = new;
+	while (++y < map->size)
+		new[y] = map->n[y];
+	if (map->size != 0)
+		free(map->n);
+	map->n = new;
 }
 
 int		array_size(char **array)
@@ -37,20 +49,20 @@ void	*add_node(int x, int y, int z)
 	return (point);
 }
 
-void	add_row(char **array, map_t *map, int add_size)
+void	add_row(char **array, t_map *map, int add_size)
 {
 	int		x;
-	
+
 	x = -1;
 	while (array[++x])
-		map->nodes[x + map->node_size] = add_node(x, map->y, atoi(array[x]));
+		map->n[x + map->size] = add_node(x, map->y, atoi(array[x]));
 	if (map->y == 0)
 		map->x = add_size;
-	map->node_size += add_size;
+	map->size += add_size;
 	map->y++;
 }
 
-void	add_to_array(char **array, map_t *map)
+void	add_to_array(char **array, t_map *map)
 {
 	int		add_size;
 

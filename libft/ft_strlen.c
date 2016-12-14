@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_line_info.c                                    :+:      :+:    :+:   */
+/*   strlen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vivan-de <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/14 15:22:55 by vivan-de          #+#    #+#             */
-/*   Updated: 2016/12/14 15:23:17 by vivan-de         ###   ########.fr       */
+/*   Created: 2016/05/09 17:55:19 by vivan-de          #+#    #+#             */
+/*   Updated: 2016/05/11 13:22:38 by vivan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-void	set_line_info(t_line *line, t_cor cor)
+size_t	ft_strlen(const char *s)
 {
-	line->dx = cor.x2 - cor.x1;
-	line->dy = cor.y2 - cor.y1;
-	line->eps = 0;
+	size_t	s1;
+
+	s1 = 0;
+	while (s[s1] != '\0' && s1 < 65535)
+	{
+		s1++;
+	}
+	return (s1);
 }

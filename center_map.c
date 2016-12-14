@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   center_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vivan-de <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/14 15:04:40 by vivan-de          #+#    #+#             */
+/*   Updated: 2016/12/14 15:04:41 by vivan-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-void    center_map_ax(map_t *map)
+void	center_map_ax(t_map *map)
 {
-    double	hy;
-    double	hx;
-    int		count;
+	double	hy;
+	double	hx;
+	int		count;
 
-    hx = map->nodes[map->node_size - 1][0] / 2;
-    hy = map->nodes[map->node_size - 1][1] / 2;
+	hx = map->n[map->size - 1][0] / 2;
+	hy = map->n[map->size - 1][1] / 2;
 	count = -1;
-	while (++count < map->node_size)
+	while (++count < map->size)
 	{
-		map->nodes[count][0] -= hx;
-		map->nodes[count][1] -= hy;
+		map->n[count][0] -= hx;
+		map->n[count][1] -= hy;
 	}
 }
