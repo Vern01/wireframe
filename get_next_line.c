@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*ft_realloc(char *p, size_t size)
+char	*ft_realloc(char *p, size_t size, int current_size)
 {
 	char	*temp;
 	int		i;
@@ -21,7 +21,7 @@ char	*ft_realloc(char *p, size_t size)
 	if (!(p = (char *)malloc(sizeof(char) * size)))
 		return (NULL);
 	i = -1;
-	while (temp[++i])
+	while (++i < current_size)
 		p[i] = temp[i];
 	free(temp);
 	return (p);
@@ -54,7 +54,7 @@ int		get_next_line(const int fd, char **line)
 	char	*temp;
 
 	i = 0;
-	if (!(temp = (char *)malloc(sizeof(char) * BUFF_SIZE)))
+	if (!(temp = (char *)malloc(sizeof(char) * BUFF_SIZE + 1)))
 		return (0);
 	c = get_char(fd);
 	while (c != '\n' && c != '\0' && temp != NULL)
@@ -62,7 +62,7 @@ int		get_next_line(const int fd, char **line)
 		temp[i++] = c;
 		c = get_char(fd);
 		if (i % (BUFF_SIZE + 1) == 0)
-			temp = ft_realloc(temp, i + BUFF_SIZE + 1);
+			temp = ft_realloc(temp, i + BUFF_SIZE + 1, i);
 	}
 	if (temp != NULL)
 		temp[i] = '\0';
